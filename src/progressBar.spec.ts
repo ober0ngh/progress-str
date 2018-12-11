@@ -1,5 +1,6 @@
 import t from 'assert';
-import { progressBar } from '.';
+import a from 'assertron';
+import { CurrentValueOutOfRange, progressBar } from '.';
 
 
 test('prints 0.5 as 50.0%', () => {
@@ -22,6 +23,7 @@ test.skip('options.length control the length of the overall result', () => {
   t.strictEqual(actual.length, 15)
 })
 
+<<<<<<< HEAD
 test('bracket input', () => {
   const actual = progressBar(0.5, { length: 30, bracket: '()', marker: '|', filler: '-', start_num: '', end_num: ' 50.0%' })
   t.strictEqual(actual, '(-----------|----------) 50.0%')
@@ -45,4 +47,39 @@ test('marker: - ', () => {
 test('marker - X', () => {
   const actual = progressBar(0.5, { length: 30, bracket: '()', marker: '=', filler: 'X', start_num: '', end_num: ' 50.0%' })
   t.strictEqual(actual, '(===========XXXXXXXXXXX) 50.0%')
+=======
+test.skip('options.length less than X will throw LengthTooShort', () => { })
+
+test('current value > 1 will throw CurrentValueOutOfRange', () => {
+  a.throws(() => progressBar(2), CurrentValueOutOfRange)
+})
+
+test('current value === 1 is treated as 100%', () => {
+  const actual = progressBar(1)
+  t.strictEqual(actual, '[---------------------|] 100.0%')
+})
+
+test.skip('specify max value', () => {
+  const actual = progressBar(10, 20)
+  t.strictEqual(actual, '[-----------|----------] 50.0%')
+})
+
+test.skip('can spec max', () => {
+  // 10 [-----|-----] 20
+  // [-----|-----] 10/20
+  // [-----|-----] 50%
+  // [-----50%-----]
+  // -----50%-----
+  // 0%----------
+  // ----------100%
+  // [-----|-----]
+  // 50% [-----|-----]
+  // 10/20 [-----|-----]
+  // 0-----10-----20
+  // const actual = progressBar(0.2) // max 1
+  // progressBar(10) // throws
+  // progressBar(10, 30)
+  // progressBar(10, 30, { length: 20 })
+  // progressBar(10, { max: 30 })
+>>>>>>> 027d655a9c18d823ebf1ab84ef88d6f21b3720e5
 })
