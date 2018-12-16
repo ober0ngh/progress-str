@@ -1,4 +1,4 @@
-export function progressBar(currentValue: number, options: { length: number } = { length: 30 }) {
+export function progressBar(currentValue: number, options: { length: number, height: number }) {
   const percent = toPercentage(currentValue, 1)
   const spaceLength = 1
   return `${toBar(currentValue, options.length - percent.length - spaceLength)} ${percent}`
