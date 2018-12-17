@@ -1,5 +1,6 @@
 export function progressBar(currentValue: number, options: { length: number, bracket: string, marker: string, filler: string, start_num: string, end_num: string } = { length: 30, bracket: '[]', marker: '|', filler: '-', start_num: '', end_num: '' }) {
 
+export function progressBar(currentValue: number, options: { length: number, height: number }) {
 import { CurrentValueOutOfRange } from './errors';
 
 export interface Options {
