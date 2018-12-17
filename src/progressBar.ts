@@ -1,4 +1,28 @@
 export function progressBar(currentValue: number, options: { length: number, bracket: string, marker: string, filler: string, start_num: string, end_num: string } = { length: 30, bracket: '[]', marker: '|', filler: '-', start_num: '', end_num: '' }) {
+
+import { CurrentValueOutOfRange } from './errors';
+
+export interface Options {
+  length: number
+}
+
+export function progressBar(currentValue: number, options?: Options)
+export function progressBar(currentValue: number, maxValue: number, options?: Options)
+export function progressBar(currentValue: number, maxOrOption?: any, options?: any) {
+  if (options) {
+    return progressBarWithMax(currentValue, maxOrOption, options)
+  }
+
+  return progressBarPercent(currentValue, maxOrOption)
+}
+
+function progressBarWithMax(currentValue: number, maxValue: number, options: Options) {
+
+}
+
+function progressBarPercent(currentValue: number, options: Options = { length: 30 }) {
+  if (currentValue > 1) throw new CurrentValueOutOfRange(currentValue)
+
   const percent = toPercentage(currentValue, 1)
   const spaceLength = 1
   let bar = '';
